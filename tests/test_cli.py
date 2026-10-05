@@ -80,7 +80,17 @@ class TestCliScan:
 
             result = runner.invoke(
                 app,
-                ["127.0.0.1", "-p", "80", "--no-discovery", "-q", "--export", "json", "-o", out_file],
+                [
+                    "127.0.0.1",
+                    "-p",
+                    "80",
+                    "--no-discovery",
+                    "-q",
+                    "--export",
+                    "json",
+                    "-o",
+                    out_file,
+                ],
             )
 
         assert result.exit_code == 0
@@ -93,6 +103,7 @@ class TestCliScan:
         captured_config: list = []
 
         with patch("netscan.cli.Scanner") as MockScanner:
+
             def capture_init(config):  # noqa: ANN001, ANN202
                 captured_config.append(config)
                 instance = MagicMock()
@@ -109,6 +120,7 @@ class TestCliScan:
         captured_config: list = []
 
         with patch("netscan.cli.Scanner") as MockScanner:
+
             def capture_init(config):  # noqa: ANN001, ANN202
                 captured_config.append(config)
                 instance = MagicMock()

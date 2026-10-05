@@ -47,27 +47,31 @@ def export_csv(results: list[ScanResult], filepath: str) -> None:
         os_name = r.os_guess.name if r.os_guess else ""
         if r.open_ports:
             for p in r.open_ports:
-                rows.append({
+                rows.append(
+                    {
+                        "ip": r.ip,
+                        "hostname": r.hostname or "",
+                        "port": p.port,
+                        "state": p.state,
+                        "service": p.service,
+                        "version": p.version,
+                        "banner": (p.banner[:120] if p.banner else ""),
+                        "os_guess": os_name,
+                    }
+                )
+        else:
+            rows.append(
+                {
                     "ip": r.ip,
                     "hostname": r.hostname or "",
-                    "port": p.port,
-                    "state": p.state,
-                    "service": p.service,
-                    "version": p.version,
-                    "banner": (p.banner[:120] if p.banner else ""),
+                    "port": "",
+                    "state": "no open ports" if r.is_up else "down",
+                    "service": "",
+                    "version": "",
+                    "banner": "",
                     "os_guess": os_name,
-                })
-        else:
-            rows.append({
-                "ip": r.ip,
-                "hostname": r.hostname or "",
-                "port": "",
-                "state": "no open ports" if r.is_up else "down",
-                "service": "",
-                "version": "",
-                "banner": "",
-                "os_guess": os_name,
-            })
+                }
+            )
 
     with Path(filepath).open("w", newline="", encoding="utf-8") as fh:
         if rows:

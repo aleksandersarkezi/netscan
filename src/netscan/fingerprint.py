@@ -19,7 +19,7 @@ class OSGuess:
 
     name: str
     confidence: str  # "high" | "medium" | "low"
-    method: str      # "banner" | "ttl" | "port-pattern"
+    method: str  # "banner" | "ttl" | "port-pattern"
     details: str = ""
 
 

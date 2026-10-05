@@ -52,7 +52,9 @@ def _version_callback(value: bool) -> None:
 def scan(  # noqa: PLR0913
     target: Annotated[
         str,
-        typer.Argument(help="Target: IP, hostname, CIDR (192.168.1.0/24), or range (192.168.1.1-50)"),
+        typer.Argument(
+            help="Target: IP, hostname, CIDR (192.168.1.0/24), or range (192.168.1.1-50)"
+        ),
     ],
     ports: Annotated[
         str,
@@ -115,7 +117,9 @@ def scan(  # noqa: PLR0913
         raise typer.Exit(code=2) from exc
 
     if export and export.lower() not in _EXPORT_FORMATS:
-        err_console.print(f"[bold]Error:[/bold] Unknown export format {export!r}. Use: json, csv, xml")
+        err_console.print(
+            f"[bold]Error:[/bold] Unknown export format {export!r}. Use: json, csv, xml"
+        )
         raise typer.Exit(code=2)
 
     if not quiet:

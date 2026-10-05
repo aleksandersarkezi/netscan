@@ -35,8 +35,7 @@ async def check_host(
         semaphore = asyncio.Semaphore(len(DISCOVERY_PORTS))
 
     tasks = [
-        asyncio.create_task(_tcp_probe(ip, port, timeout, semaphore))
-        for port in DISCOVERY_PORTS
+        asyncio.create_task(_tcp_probe(ip, port, timeout, semaphore)) for port in DISCOVERY_PORTS
     ]
 
     try:

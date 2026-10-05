@@ -10,6 +10,7 @@ from netscan.utils import format_duration, is_valid_ip, parse_ports, parse_targe
 # parse_targets
 # ---------------------------------------------------------------------------
 
+
 class TestParseTargets:
     def test_single_ipv4(self) -> None:
         assert parse_targets("10.0.0.1") == ["10.0.0.1"]
@@ -56,6 +57,7 @@ class TestParseTargets:
 # ---------------------------------------------------------------------------
 # parse_ports
 # ---------------------------------------------------------------------------
+
 
 class TestParsePorts:
     def test_single_port(self) -> None:
@@ -114,6 +116,7 @@ class TestParsePorts:
 # is_valid_ip
 # ---------------------------------------------------------------------------
 
+
 class TestIsValidIp:
     def test_valid_ips(self) -> None:
         assert is_valid_ip("192.168.1.1") is True
@@ -130,6 +133,7 @@ class TestIsValidIp:
 # ---------------------------------------------------------------------------
 # format_duration
 # ---------------------------------------------------------------------------
+
 
 class TestFormatDuration:
     def test_milliseconds(self) -> None:

@@ -39,7 +39,7 @@ class ScanConfig:
     ports: list[int]
     timeout: float = 1.0
     concurrency: int = 100
-    rate_limit: float | None = None   # max new connections per second
+    rate_limit: float | None = None  # max new connections per second
     grab_banners: bool = True
     os_detection: bool = True
     host_discovery: bool = True
@@ -146,11 +146,7 @@ class Scanner:
 
             # --- Stage 4: OS fingerprinting ---
             if self.config.os_detection and result.open_ports:
-                banners = {
-                    p.port: p.banner
-                    for p in result.open_ports
-                    if p.banner
-                }
+                banners = {p.port: p.banner for p in result.open_ports if p.banner}
                 result.os_guess = await fingerprint_os(
                     ip=ip,
                     open_ports=[p.port for p in result.open_ports],

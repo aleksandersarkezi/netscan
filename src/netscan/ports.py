@@ -85,10 +85,7 @@ async def scan_ports(
     Returns:
         List of PortResult objects sorted by port number.
     """
-    tasks = [
-        asyncio.create_task(scan_port(ip, port, timeout, semaphore))
-        for port in ports
-    ]
+    tasks = [asyncio.create_task(scan_port(ip, port, timeout, semaphore)) for port in ports]
 
     results: list[PortResult] = []
     for coro in asyncio.as_completed(tasks):

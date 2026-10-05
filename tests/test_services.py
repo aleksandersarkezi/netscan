@@ -109,9 +109,7 @@ class TestGrabTcpBanner:
 
         with patch("asyncio.open_connection", new_callable=AsyncMock) as mock_conn:
             mock_conn.return_value = (mock_reader, mock_writer)
-            result = await _grab_tcp_banner(
-                "127.0.0.1", 80, b"HEAD / HTTP/1.0\r\n\r\n", 2.0
-            )
+            result = await _grab_tcp_banner("127.0.0.1", 80, b"HEAD / HTTP/1.0\r\n\r\n", 2.0)
 
         assert result is not None
         assert "nginx" in result
@@ -143,9 +141,7 @@ class TestDetectServices:
 
     async def test_no_banners_uses_port_lookup(self) -> None:
         port = PortResult(port=443, state="open")
-        results = await detect_services(
-            "10.0.0.1", [port], timeout=1.0, grab_banners=False
-        )
+        results = await detect_services("10.0.0.1", [port], timeout=1.0, grab_banners=False)
         assert results[0].service == "HTTPS"
 
     async def test_empty_port_list(self) -> None:
