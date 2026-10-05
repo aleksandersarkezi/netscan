@@ -20,7 +20,7 @@ Export to JSON / CSV / XML
 Supports IPs, CIDR ranges, and hostnames
 Rate limiting and concurrency control
 Installation
-git clone https://github.com/yourusername/netscan.git
+git clone https://github.com/aleksandersarkezi/netscan.git
 cd netscan
 pip install -e .
 
