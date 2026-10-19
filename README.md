@@ -1,101 +1,119 @@
-netscan
+# netscan
 
-Simple async network scanner written in Python 3.11+.
+[![CI](https://github.com/aleksandersarkezi/netscan/actions/workflows/ci.yml/badge.svg)](https://github.com/aleksandersarkezi/netscan/actions/workflows/ci.yml)
 
-
-
+A small async network scanner for the command line, written in Python 3.11+.
+It does TCP connect scans, so it needs no root privileges.
 
 ## Ethical use
 
-Only scan networks you own or have permission to test.
-Unauthorized scanning may be illegal.
+Only scan networks you own or have permission to test. Unauthorized scanning may be
+illegal.
 
-Features
-Async TCP connect scan (no root required)
-Basic host discovery (no ICMP)
-Banner grabbing (HTTP, SSH, FTP, SMTP, etc.)
-Simple OS guessing (heuristics, not reliable)
-CLI output with rich
-Export to JSON / CSV / XML
-Supports IPs, CIDR ranges, and hostnames
-Rate limiting and concurrency control
-Installation
+## Features
+
+- Async TCP connect scan, no root required
+- Basic host discovery over TCP (no ICMP)
+- Banner grabbing for HTTP, SSH, FTP, SMTP and more
+- Simple OS guessing from banners and port patterns (heuristics, not reliable)
+- Colored terminal output with [rich](https://github.com/Textualize/rich)
+- Export to JSON, CSV or XML
+- Targets as IPs, CIDR ranges, IP ranges or hostnames
+- Rate limiting and concurrency control
+
+## Installation
+
+Requires Python 3.11+.
+
+```bash
 git clone https://github.com/aleksandersarkezi/netscan.git
 cd netscan
 pip install -e .
+```
 
-Dev install:
+For development:
 
+```bash
 pip install -e ".[dev]"
+```
 
-Requirements: Python 3.11+
-
-Usage
+## Usage
 
 Basic:
 
+```bash
 netscan 192.168.1.1
 netscan 192.168.1.0/24
 netscan scanme.nmap.org
+```
 
 Ports:
 
+```bash
 netscan 10.0.0.1 -p 22,80,443
 netscan 10.0.0.1 -p 1-1024
 netscan 10.0.0.1 -p top100
+```
 
 Ranges:
 
+```bash
 netscan 192.168.1.1-50
 netscan 10.0.0.1-10.0.0.100
+```
 
 Export:
 
+```bash
 netscan 192.168.1.0/24 --export json -o results.json
 netscan 10.0.0.1 --export csv
 netscan target.example.com --export xml
-Common flags
--p / --ports – ports to scan
--t / --timeout – connection timeout
--c / --concurrency – max parallel connections
---rate – limit connections per second
---no-discovery – skip host check
---no-banners – skip service detection
---no-os – skip OS guessing
--q – quiet output
--v – verbose
+```
 
-Run netscan --help for full options.
+### Common flags
 
-Project structure
+| Flag | What it does |
+| --- | --- |
+| `-p`, `--ports` | Ports to scan: `80,443`, `1-1024`, `top100` or `top1000` |
+| `-t`, `--timeout` | Connection timeout per port, in seconds |
+| `-c`, `--concurrency` | Maximum parallel connections |
+| `--rate` | Limit connections per second |
+| `--no-discovery` | Skip the host check and treat every target as up |
+| `--no-banners` | Skip service detection |
+| `--no-os` | Skip OS guessing |
+| `-q`, `--quiet` | Quiet output |
+| `-v`, `--verbose` | Verbose output |
+
+Run `netscan --help` for every option.
+
+## Project structure
+
+```text
 src/netscan/
-├── cli.py
-├── scanner.py
-├── discovery.py
-├── ports.py
-├── services.py
-├── fingerprint.py
-├── exporters.py
-└── utils.py
-Tests
+├── cli.py          command-line interface
+├── scanner.py      async TCP connect scanning
+├── discovery.py    host discovery
+├── ports.py        port lists and parsing
+├── services.py     banner grabbing
+├── fingerprint.py  OS guessing
+├── exporters.py    JSON, CSV and XML output
+└── utils.py        target parsing and helpers
+```
+
+## Tests
+
+```bash
 pytest
 pytest --cov=netscan
-Notes
+```
 
-This is a small project for learning and experimentation.
-For serious use, use nmap.
-## Contributing
+CI runs ruff and the test suite on Python 3.11, 3.12 and 3.13 for every push.
 
-1. Fork the repo
-2. Create a feature branch: `git checkout -b feat/my-feature`
-3. Write tests for your change
-4. Ensure `ruff check` and `pytest` pass
-5. Submit a pull request
+## Notes
 
-Please follow [Conventional Commits](https://www.conventionalcommits.org/) for commit messages.
-
----
+This is a small project for learning and experimentation. For serious work, use
+[nmap](https://nmap.org).
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT, see [LICENSE](LICENSE).

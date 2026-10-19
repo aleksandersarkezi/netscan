@@ -8,7 +8,7 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
-## [1.0.0] - 2024-01-01
+## [1.0.0] - 2026-04-19
 
 ### Added
 - Async TCP connect port scanner with configurable concurrency (`asyncio.Semaphore`)

@@ -5,10 +5,10 @@ build-backend = "hatchling.build"
 [project]
 name = "netscan"
 version = "1.0.0"
-description = "Modern async network scanner with rich terminal output"
+description = "Small async network scanner for the command line"
 readme = "README.md"
 license = { file = "LICENSE" }
-authors = [{ name = "netscan contributors" }]
+authors = [{ name = "Aleksander Šarkezi" }]
 keywords = ["network", "scanner", "async", "security", "port-scanner"]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -27,7 +27,7 @@ classifiers = [
 ]
 requires-python = ">=3.11"
 dependencies = [
-    "typer[all]>=0.12",
+    "typer>=0.12",
     "rich>=13.7",
 ]
 
@@ -43,9 +43,9 @@ dev = [
 netscan = "netscan.cli:app"
 
 [project.urls]
-Homepage = "https://github.com/yourusername/netscan"
-Repository = "https://github.com/yourusername/netscan"
-Issues = "https://github.com/yourusername/netscan/issues"
+Homepage = "https://github.com/aleksandersarkezi/netscan"
+Repository = "https://github.com/aleksandersarkezi/netscan"
+Issues = "https://github.com/aleksandersarkezi/netscan/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/netscan"]
@@ -92,8 +92,6 @@ select = [
     "ANN", # flake8-annotations (partial)
 ]
 ignore = [
-    "ANN101",  # self type annotation not needed
-    "ANN102",  # cls type annotation not needed
     "ANN401",  # Dynamically typed expressions (Any) are disallowed
     "E501",    # line-too-long handled by formatter
 ]

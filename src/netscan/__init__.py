@@ -5,7 +5,7 @@ from netscan.ports import PortResult
 from netscan.scanner import ScanConfig, Scanner, ScanResult
 
 __version__ = "1.0.0"
-__author__ = "netscan contributors"
+__author__ = "Aleksander Šarkezi"
 
 __all__ = [
     "Scanner",
